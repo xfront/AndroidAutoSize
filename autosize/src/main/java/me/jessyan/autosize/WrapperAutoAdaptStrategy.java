@@ -35,7 +35,7 @@ public class WrapperAutoAdaptStrategy implements AutoAdaptStrategy {
 
     @Override
     public void applyAdapt(Object target, Activity activity) {
-        onAdaptListener onAdaptListener = AutoSizeConfig.getInstance().getOnAdaptListener();
+        OnAdaptListener onAdaptListener = AutoSizeConfig.getInstance().getOnAdaptListener();
         if (onAdaptListener != null){
             onAdaptListener.onAdaptBefore(target, activity);
         }

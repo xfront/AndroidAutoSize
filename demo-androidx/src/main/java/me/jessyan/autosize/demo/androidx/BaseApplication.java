@@ -23,7 +23,7 @@ import java.util.Locale;
 
 import me.jessyan.autosize.AutoSize;
 import me.jessyan.autosize.AutoSizeConfig;
-import me.jessyan.autosize.onAdaptListener;
+import me.jessyan.autosize.OnAdaptListener;
 import me.jessyan.autosize.utils.AutoSizeLog;
 
 /**
@@ -76,7 +76,7 @@ public class BaseApplication extends Application {
 //                .setPrivateFontScale(0.8f)
 
                 //屏幕适配监听器
-                .setOnAdaptListener(new onAdaptListener() {
+                .setOnAdaptListener(new OnAdaptListener() {
                     @Override
                     public void onAdaptBefore(Object target, Activity activity) {
                         //使用以下代码, 可以解决横竖屏切换时的屏幕适配问题

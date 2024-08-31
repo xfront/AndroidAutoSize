@@ -26,7 +26,7 @@ import android.app.Activity;
  * <a href="https://github.com/JessYanCoding">Follow me</a>
  * ================================================
  */
-public interface onAdaptListener {
+public interface OnAdaptListener {
     /**
      * 在屏幕适配前调用
      *

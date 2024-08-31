@@ -158,7 +158,7 @@ public final class AutoSizeConfig {
     /**
      * 屏幕适配监听器，用于监听屏幕适配时的一些事件
      */
-    private onAdaptListener mOnAdaptListener;
+    private OnAdaptListener mOnAdaptListener;
 
     static {
         DEPENDENCY_ANDROIDX = findClassByClassName("androidx.fragment.app.FragmentActivity");
@@ -336,9 +336,9 @@ public final class AutoSizeConfig {
     /**
      * 设置屏幕适配监听器
      *
-     * @param onAdaptListener {@link onAdaptListener}
+     * @param onAdaptListener {@link OnAdaptListener}
      */
-    public AutoSizeConfig setOnAdaptListener(onAdaptListener onAdaptListener) {
+    public AutoSizeConfig setOnAdaptListener(OnAdaptListener onAdaptListener) {
         Preconditions.checkNotNull(onAdaptListener, "onAdaptListener == null");
         mOnAdaptListener = onAdaptListener;
         return this;
@@ -427,7 +427,7 @@ public final class AutoSizeConfig {
      *
      * @return {@link #mOnAdaptListener}
      */
-    public onAdaptListener getOnAdaptListener() {
+    public OnAdaptListener getOnAdaptListener() {
         return mOnAdaptListener;
     }
 
