@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void stop(View view) {
         Toast.makeText(getApplicationContext(), "AndroidAutoSize stops working!", Toast.LENGTH_SHORT).show();
-        AutoSizeConfig.getInstance().stop(this);
+        AutoSizeConfig.stop(this);
     }
 
     /**
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void restart(View view) {
         Toast.makeText(getApplicationContext(), "AndroidAutoSize continues to work", Toast.LENGTH_SHORT).show();
-        AutoSizeConfig.getInstance().restart();
+        AutoSizeConfig.restart();
     }
 
     /**

@@ -15,14 +15,16 @@
  */
 package me.jessyan.autosize
 
+import android.app.Fragment
+import android.app.FragmentManager
+import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
+import androidx.annotation.RequiresApi
 
 /**
  * ================================================
- * [FragmentLifecycleCallbacksImplToAndroidx] 可用来代替在 BaseFragment 中加入适配代码的传统方式
- * [FragmentLifecycleCallbacksImplToAndroidx] 这种方案类似于 AOP, 面向接口, 侵入性低, 方便统一管理, 扩展性强, 并且也支持适配三方库的 [Fragment]
+ * [FragmentLifecycleCallbacksImplToSys] 可用来代替在 BaseFragment 中加入适配代码的传统方式
+ * [FragmentLifecycleCallbacksImplToSys] 这种方案类似于 AOP, 面向接口, 侵入性低, 方便统一管理, 扩展性强, 并且也支持适配三方库的 [Fragment]
  *
  *
  * Created by JessYan on 2018/8/25 13:52
@@ -30,14 +32,15 @@ import androidx.fragment.app.FragmentManager
  * [Follow me](https://github.com/JessYanCoding)
  * ================================================
  */
-class FragmentLifecycleCallbacksImplToAndroidx(
+@RequiresApi(api = Build.VERSION_CODES.O)
+class FragmentLifecycleCallbacksImplToSys(
     /**
      * 屏幕适配逻辑策略类
      */
     private var autoAdaptStrategy: AutoAdaptStrategy?
 ) : FragmentManager.FragmentLifecycleCallbacks() {
-    override fun onFragmentCreated(fm: FragmentManager, f: Fragment, savedInstanceState: Bundle?) {
-        autoAdaptStrategy?.applyAdapt(f, f.requireActivity())
+    override fun onFragmentCreated(fm: FragmentManager, f: Fragment, savedInstanceState: Bundle) {
+        autoAdaptStrategy?.applyAdapt(f, f.activity)
     }
 
     /**

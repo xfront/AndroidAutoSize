@@ -13,48 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package me.jessyan.autosize.utils;
+package me.jessyan.autosize.utils
 
-import android.util.Log;
+import android.util.Log
 
 /**
  * ================================================
  * Created by JessYan on 2018/8/8 18:48
- * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
- * <a href="https://github.com/JessYanCoding">Follow me</a>
+ * [Contact me](mailto:jess.yan.effort@gmail.com)
+ * [Follow me](https://github.com/JessYanCoding)
  * ================================================
  */
-public class AutoSizeLog {
-    private static final String TAG = "AndroidAutoSize";
-    private static boolean debug;
+object AutoSizeLog {
 
-    private AutoSizeLog() {
-        throw new IllegalStateException("you can't instantiate me!");
-    }
-
-    public static boolean isDebug() {
-        return debug;
-    }
-
-    public static void setDebug(boolean debug) {
-        AutoSizeLog.debug = debug;
-    }
-
-    public static void d(String message) {
-        if (debug) {
-            Log.d(TAG, message);
+    private const val TAG = "AndroidAutoSize"
+    @JvmStatic
+    var isDebug: Boolean = false
+    @JvmStatic
+    fun d(message: String?) {
+        if (isDebug) {
+            Log.d(TAG, message!!)
         }
     }
-
-    public static void w(String message) {
-        if (debug) {
-            Log.w(TAG, message);
+    @JvmStatic
+    fun w(message: String?) {
+        if (isDebug) {
+            Log.w(TAG, message!!)
         }
     }
-
-    public static void e(String message) {
-        if (debug) {
-            Log.e(TAG, message);
+    @JvmStatic
+    fun e(message: String?) {
+        if (isDebug) {
+            Log.e(TAG, message!!)
         }
     }
 }

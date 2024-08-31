@@ -13,69 +13,84 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package me.jessyan.autosize.utils;
+package me.jessyan.autosize.utils
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.util.TypedValue;
-import android.app.Application;
-
-import java.lang.reflect.InvocationTargetException;
+import android.annotation.SuppressLint
+import android.app.Application
+import android.content.Context
+import android.util.TypedValue
+import java.lang.reflect.InvocationTargetException
 
 /**
  * ================================================
  * AndroidAutoSize 常用工具类
- * <p>
+ *
+ *
  * Created by JessYan on 2018/8/25 15:24
- * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
- * <a href="https://github.com/JessYanCoding">Follow me</a>
+ * [Contact me](mailto:jess.yan.effort@gmail.com)
+ * [Follow me](https://github.com/JessYanCoding)
  * ================================================
  */
-public class AutoSizeUtils {
-
-    private AutoSizeUtils() {
-        throw new IllegalStateException("you can't instantiate me!");
+object AutoSizeUtils {
+    @JvmStatic
+    fun dp2px(context: Context, value: Float): Int {
+        return (TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            value,
+            context.resources.displayMetrics
+        ) + 0.5f).toInt()
     }
-
-    public static int dp2px(Context context, float value) {
-        return (int) (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, context.getResources().getDisplayMetrics()) + 0.5f);
+    @JvmStatic
+    fun sp2px(context: Context, value: Float): Int {
+        return (TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_SP,
+            value,
+            context.resources.displayMetrics
+        ) + 0.5f).toInt()
     }
-
-    public static int sp2px(Context context, float value) {
-        return (int) (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, value, context.getResources().getDisplayMetrics()) + 0.5f);
+    @JvmStatic
+    fun pt2px(context: Context, value: Float): Int {
+        return (TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_PT,
+            value,
+            context.resources.displayMetrics
+        ) + 0.5f).toInt()
     }
-
-    public static int pt2px(Context context, float value) {
-        return (int) (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PT, value, context.getResources().getDisplayMetrics()) + 0.5f);
+    @JvmStatic
+    fun in2px(context: Context, value: Float): Int {
+        return (TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_IN,
+            value,
+            context.resources.displayMetrics
+        ) + 0.5f).toInt()
     }
-
-    public static int in2px(Context context, float value) {
-        return (int) (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_IN, value, context.getResources().getDisplayMetrics()) + 0.5f);
+    @JvmStatic
+    fun mm2px(context: Context, value: Float): Int {
+        return (TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_MM,
+            value,
+            context.resources.displayMetrics
+        ) + 0.5f).toInt()
     }
-
-    public static int mm2px(Context context, float value) {
-        return (int) (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_MM, value, context.getResources().getDisplayMetrics()) + 0.5f);
-    }
-    
-    public static Application getApplicationByReflect() {
-        try {
-            @SuppressLint("PrivateApi")
-            Class<?> activityThread = Class.forName("android.app.ActivityThread");
-            Object thread = activityThread.getMethod("currentActivityThread").invoke(null);
-            Object app = activityThread.getMethod("getApplication").invoke(thread);
-            if (app == null) {
-                throw new NullPointerException("you should init first");
+    @JvmStatic
+    val applicationByReflect: Application
+        get() {
+            try {
+                @SuppressLint("PrivateApi") val activityThread =
+                    Class.forName("android.app.ActivityThread")
+                val thread = activityThread.getMethod("currentActivityThread").invoke(null)
+                val app = activityThread.getMethod("getApplication").invoke(thread)
+                    ?: throw NullPointerException("you should init first")
+                return app as Application
+            } catch (e: NoSuchMethodException) {
+                e.printStackTrace()
+            } catch (e: IllegalAccessException) {
+                e.printStackTrace()
+            } catch (e: InvocationTargetException) {
+                e.printStackTrace()
+            } catch (e: ClassNotFoundException) {
+                e.printStackTrace()
             }
-            return (Application) app;
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            throw NullPointerException("you should init first")
         }
-        throw new NullPointerException("you should init first");
-    }
 }
